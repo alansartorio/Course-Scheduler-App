@@ -2,16 +2,13 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import * as path from "path";
 import { defineConfig } from "vite";
 import { viteMockServe } from "vite-plugin-mock";
-import wasmPack from "vite-plugin-wasm-pack";
 import postcssConfig from "./postcss.config.js";
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    wasmPack([], ["@course-scheduler-app/scheduler-wasm"]),
-    svelte(),
-    viteMockServe(),
-  ],
+  plugins: [wasm(), topLevelAwait(), svelte(), viteMockServe()],
   css: {
     postcss: postcssConfig,
   },
